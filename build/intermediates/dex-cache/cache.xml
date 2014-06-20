@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/build/intermediates/pre-dexed/debug/classes-2a836f627591e3ee99604a1feaf12a62f94cf1b5.jar"
+        jar="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.1.0/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28"/>
+    <item
+        dex="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/build/intermediates/pre-dexed/debug/android-async-http-1.4.3-22aaa96e2cfa0f61e8a7deaedc718cae267ca642.jar"
+        jar="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/libs/android-async-http-1.4.3.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="f70e680861fdf9449819003e7799a4e9aca047f8"/>
+    <item
+        dex="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-fe930dc68beb1e566675ce71b270d4091c6c249b.jar"
+        jar="/Applications/Android Studio.app/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67"/>
+    <item
+        dex="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/build/intermediates/pre-dexed/debug/picasso-2.1.1-b2dab76c30c658a033960afd942b6050a5129112.jar"
+        jar="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/libs/picasso-2.1.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="ab19bfb23f641f189b6dca9a4d393f8dc291103a"/>
+
+</pre-dex-items>
