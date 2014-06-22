@@ -25,5 +25,11 @@
         jumboMode="false"
         revision="19.1.0"
         sha1="ab19bfb23f641f189b6dca9a4d393f8dc291103a"/>
+    <item
+        dex="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/build/intermediates/pre-dexed/debug/android-smart-image-view-1.0.0-9dc5d8a2c4492ffd272f93e0abccf187e3f3b7ad.jar"
+        jar="/Users/dharm/AndroidStudioProjects/GoogleSearchApp/app/libs/android-smart-image-view-1.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="d76ea8c3e9a60101244d6d04aff8cc75888570f0"/>
 
 </pre-dex-items>

@@ -24,10 +24,11 @@
         android:layout_height="wrap_content"
         android:text="Search"
         android:id="@+id/btnSearch"
-        android:layout_alignBottom="@+id/txtSearch"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="searchForTheString"/>
+        android:onClick="searchForTheString"
+        android:layout_alignRight="@+id/gridView"
+        android:layout_alignEnd="@+id/gridView"
+        android:layout_marginRight="68dp"
+        android:layout_alignTop="@+id/txtSearch" />
 
     <GridView
         android:layout_width="wrap_content"
@@ -36,6 +37,18 @@
         android:layout_below="@+id/txtSearch"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:choiceMode="multipleChoiceModal"
         android:numColumns="auto_fit" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:id="@+id/btnSetting"
+        android:layout_alignTop="@+id/btnSearch"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="changeToFilter"/>
 
 </RelativeLayout>

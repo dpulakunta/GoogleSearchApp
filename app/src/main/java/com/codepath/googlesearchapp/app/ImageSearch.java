@@ -4,13 +4,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * Created by dharm on 6/18/14.
  */
-public class ImageSearch {
+public class ImageSearch implements Serializable{
+    private static final long serialVersionUID = 2636389073439281291L;
     private String url;
     private String tbUrl;
     ImageSearch(JSONObject json){

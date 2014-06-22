@@ -1,5 +1,6 @@
 package com.codepath.googlesearchapp.app;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -27,6 +29,8 @@ public class SearchActivity extends ActionBarActivity {
     GridView gvSearchItem;
     ArrayList<ImageSearch> imageResult = new ArrayList<ImageSearch>();
     ImageSearchAdapter imgSearchAdapter;
+    String extraQuery = new String();
+    String searchQuery;
 
     public static final String TAG = "SearchActivity";
 
@@ -37,6 +41,20 @@ public class SearchActivity extends ActionBarActivity {
         setupWidgets();
         imgSearchAdapter = new ImageSearchAdapter(this, imageResult);
         gvSearchItem.setAdapter(imgSearchAdapter);
+        gvSearchItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View parent, int position, long l) {
+                Intent imageDisplayIntent = new Intent(getApplicationContext(),ImageDisplayActivity.class);
+                ImageSearch imageRes = imageResult.get(position);
+                imageDisplayIntent.putExtra("ImageURL",imageRes);
+                startActivity(imageDisplayIntent);
+            }
+        });
+    }
+
+    public void changeToFilter(View v){
+        Intent filterIntent = new Intent(getApplicationContext(),SearchFilterActivity.class);
+        startActivityForResult(filterIntent, 1);
     }
 
     public void setupWidgets(){
@@ -45,11 +63,12 @@ public class SearchActivity extends ActionBarActivity {
         gvSearchItem = (GridView) findViewById(R.id.gridView);
     }
     public void searchForTheString(View view){
-        String searchQuery = searchString.getText().toString();
+        searchQuery = searchString.getText().toString();
         Toast.makeText(this,"Searching for "+searchQuery ,Toast.LENGTH_SHORT).show();
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(this,"https://ajax.googleapis.com/ajax/services/search/images?szx=8&"+
-                "start=" + 0 + "&v=1.0&q=" + Uri.encode(searchQuery),new JsonHttpResponseHandler(){
+        String url = buildQueryString();
+        Log.i("Search",url);
+        client.get(this,url,new JsonHttpResponseHandler(){
 
             @Override
             public void onSuccess(JSONObject response) {
@@ -64,6 +83,33 @@ public class SearchActivity extends ActionBarActivity {
                 }
             }
         });
+    }
+
+    private String buildQueryString() {
+        StringBuilder res = new StringBuilder();
+        res.append("https://ajax.googleapis.com/ajax/services/search/images?szx=8&");
+        res.append("start=");
+        res.append(0);
+        res.append("&v=1.0&q=");
+        res.append(Uri.encode(searchQuery));
+        if(extraQuery!=null)
+            res.append(extraQuery);
+        return res.toString();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                extraQuery=data.getStringExtra("ExtraQuery");
+                Log.i("Search",extraQuery);
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+                extraQuery="";
+                Log.i("Search",extraQuery);
+            }
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
