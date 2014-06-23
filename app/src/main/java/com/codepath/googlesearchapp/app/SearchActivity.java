@@ -50,6 +50,24 @@ public class SearchActivity extends ActionBarActivity {
                 startActivity(imageDisplayIntent);
             }
         });
+        gvSearchItem.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to your AdapterView
+                customLoadMoreDataFromApi(page);
+                // or customLoadMoreDataFromApi(totalItemsCount);
+            }
+        });
+    }
+
+    public void customLoadMoreDataFromApi(int offset) {
+        // This method probably sends out a network request and appends new data items to your adapter.
+        // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
+        // Deserialize API response and then construct new objects to append to the adapter
+        addItemsToView(offset);
+
+
     }
 
     public void changeToFilter(View v){
@@ -63,10 +81,14 @@ public class SearchActivity extends ActionBarActivity {
         gvSearchItem = (GridView) findViewById(R.id.gridView);
     }
     public void searchForTheString(View view){
+
         searchQuery = searchString.getText().toString();
         Toast.makeText(this,"Searching for "+searchQuery ,Toast.LENGTH_SHORT).show();
+        addItemsToView(0);
+    }
+    public void addItemsToView(int offset){
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = buildQueryString();
+        String url = buildQueryString(offset);
         Log.i("Search",url);
         client.get(this,url,new JsonHttpResponseHandler(){
 
@@ -75,7 +97,7 @@ public class SearchActivity extends ActionBarActivity {
                 JSONArray imageJsonResults = null;
                 try {
                     imageJsonResults = response.getJSONObject("responseData").getJSONArray("results");
-                    imageResult.clear();
+                    //imageResult.clear();
                     imgSearchAdapter.addAll(ImageSearch.fromJSONArray(imageJsonResults));
                     Log.d("DEBUG",imageResult.toString());
                 } catch (JSONException e) {
@@ -84,12 +106,11 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
     }
-
-    private String buildQueryString() {
+    private String buildQueryString(int offset) {
         StringBuilder res = new StringBuilder();
-        res.append("https://ajax.googleapis.com/ajax/services/search/images?szx=8&");
+        res.append("https://ajax.googleapis.com/ajax/services/search/images?rsz=8&");
         res.append("start=");
-        res.append(0);
+        res.append(offset);
         res.append("&v=1.0&q=");
         res.append(Uri.encode(searchQuery));
         if(extraQuery!=null)
