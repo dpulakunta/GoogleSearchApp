@@ -65,6 +65,7 @@ public class SearchActivity extends ActionBarActivity {
         // This method probably sends out a network request and appends new data items to your adapter.
         // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
         // Deserialize API response and then construct new objects to append to the adapter
+        offset = offset*8;
         addItemsToView(offset);
 
 
@@ -84,6 +85,7 @@ public class SearchActivity extends ActionBarActivity {
 
         searchQuery = searchString.getText().toString();
         Toast.makeText(this,"Searching for "+searchQuery ,Toast.LENGTH_SHORT).show();
+        imageResult.clear();
         addItemsToView(0);
     }
     public void addItemsToView(int offset){
